@@ -1,0 +1,17 @@
+---
+apiVersion: ratelimit.zufardhiyaulhaq.com/v1alpha1
+kind: GlobalRateLimit
+metadata:
+  name: ratelimit-httpbin
+  namespace: istio-system
+spec:
+  config: "istio-public-gateway"
+  selector:
+    vhost: "*:80"
+  matcher:
+  - request_headers:
+      header_name: ":method"
+      descriptor_key: "method"
+  limit:
+    unit: minute
+    requests_per_unit: 1
